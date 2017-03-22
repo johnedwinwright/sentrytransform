@@ -22,7 +22,7 @@ get '/sentry' do
   @newdata ==0
   @sentryresponse[0]["stats"]["24h"].each do |time, count|
     puts "#{time.to_i}, #{count}"
-    @newdata = @newdata ++ count
+    @newdata += count
   end
   puts "#{@newdata}"
   @newdata.to_json
