@@ -18,13 +18,14 @@ get '/sentry' do
   response = http.request(request)
 
   @sentryresponse = JSON.parse(response.body)
-
+  @sumjson =[]
   @newdata = 0
   @sentryresponse[0]["stats"]["24h"].each do |time, count|
     puts "#{time.to_i}, #{count}"
     @newdata += count
   end
+  @sumjson << @newdata
   puts "#{@newdata}"
-  @newdata.to_json
+  @sumjson.to_json
 
 end
