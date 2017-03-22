@@ -1,0 +1,8 @@
+
+<% if @sunny_destinations.empty?%>
+  <p>No data available for <%= @weather_response["name"] %>!  Try a larger airport.</p>
+<%else
+  @sunny_destinations.each do |ad| %>
+  <p>It's sunny in <%= ad["name"] %>!</p>
+<%end
+end%>
