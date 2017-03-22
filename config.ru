@@ -1,2 +1,2 @@
-require './weather'
+require './sentry'
 run Sinatra::Application
