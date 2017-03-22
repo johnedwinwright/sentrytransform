@@ -6,7 +6,7 @@ require 'erb'
 require "net/http"
 require "uri"
 
-get '/sentry/test' do
+get '/sentry' do
   content_type :json
   @sentry_key = ENV['sentry_key']
   uri = URI.parse("https://app.getsentry.com/api/0/projects/cnncom/dynaimage/issues/?statsPeriod=24h")
