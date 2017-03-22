@@ -20,11 +20,14 @@ get '/sentry' do
   @sentryresponse = JSON.parse(response.body)
 
   @newdata = []
+  @newdata << [@sentryresponse[0]["title"]
   @sentryresponse[0]["stats"]["24h"].each do |time, count|
     puts "#{time.to_i}, #{count}"
-    @newdata << [@sentryresponse[0]["title"], time.to_i, count]
+    @newdata << [time.to_i, count]
   end
   puts "#{@newdata}"
+
+  @newdata << ]
   @newdata.to_json
 
 end
