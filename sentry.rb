@@ -24,7 +24,7 @@ get '/sentry' do
     puts "#{time.to_i}, #{count}"
     @newdata += count
   end
-  @sumjson << @newdata
+  @sumjson << {"count:" @newdata}
   puts "#{@newdata}"
   @sumjson.to_json
 
