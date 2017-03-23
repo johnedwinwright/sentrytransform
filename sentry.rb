@@ -20,12 +20,10 @@ get '/sentry' do
   @sentryresponse = JSON.parse(response.body)
   @sumjson ={}
   @newdata = 0
-  #@sentryresponse[0]["stats"]["24h"].each do |time, count|
-  #  puts "#{time.to_i}, #{count}"
-  #  @newdata += count
-  #end
-
-  @newdata += @sentryresponse[0]["stats"]["24h"].last
+  @sentryresponse[0]["stats"]["24h"].last do |time, count|
+    puts "#{time.to_i}, #{count}"
+    @newdata += count
+  end
   @sumjson.merge!(count: "#{@newdata}")
   puts "#{@newdata}"
   @sumjson.to_json
