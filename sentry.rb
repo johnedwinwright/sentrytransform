@@ -23,21 +23,35 @@ get '/sentry' do
   if response.message == "OK"
 
     @sentryresponse = JSON.parse(response.body)
-    @sumjson ={}
-    @newdata = 0
 
+    @sumjson =[]
+    @presumjson ={}
+    @newdata = 0
+    @totalerrorsum = 0
+    @totalerrorsumnode = {}
     puts "#{@sentryresponse}"
 
-    loopcount = 0
-    @sentryresponse[0]["stats"]["24h"].each do |time, count|
-      puts "#{time.to_i}, #{count}"
-      loopcount += 1
-      if loopcount == 24
-        @newdata += count
+    @sentryresponse.each do |toplevel|
+      if toplevel["stats"].has_key?("24h")
+        loopcount = 0
+        toplevel["stats"]["24h"].each do |time, count|
+          puts "#{time.to_i}, #{count}"
+          loopcount += 1
+          if loopcount == 24
+            @newdata += count
+            @totalerrorsum += count
+          end
+        end
+        @presumjson.merge!(title: "#{toplevel["title"]}")
+        @presumjson.merge!(count: "#{@newdata}")
+        @sumjson << @presumjson
+        @presumjson = {}
+        @newdata = 0
       end
     end
-    @sumjson.merge!(count: "#{@newdata}")
-    puts "#{@newdata}"
+
+    @totalerrorsumnode.merge!(Total_errors: "#{@totalerrorsum}")
+    @sumjson << @totalerrorsumnode
     @sumjson.to_json
 
   else
