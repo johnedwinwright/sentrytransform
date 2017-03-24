@@ -47,8 +47,7 @@ get '/sentry' do
             @totalerrorsum += count
           end
         end
-        #@presumjson.merge!(title: "#{toplevel["title"]}")
-        @presumjson.merge!("#{toplevel["title"]}: #{@newdata}")
+        @presumjson.merge!({:"#{toplevel["title"]}" => "#{@newdata}"})
         @sumjson << @presumjson
         @presumjson = {}
         @newdata = 0
