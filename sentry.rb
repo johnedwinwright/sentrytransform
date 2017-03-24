@@ -6,6 +6,12 @@ require 'erb'
 require "net/http"
 require "uri"
 
+get '/' do
+  status = "OK"
+  status.to_json
+end
+
+
 get '/sentry' do
   project = params[:project]
   content_type :json
