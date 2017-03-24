@@ -15,7 +15,7 @@ get '/sentry' do
   project = params[:project]
   content_type :json
 
-  @sentry_key = ENV['sentry_key']
+  @sentry_key = ENV['SENTRY_KEY']
 
   uri = URI.parse("https://app.getsentry.com/api/0/projects/cnncom/#{project.downcase}/issues/?statsPeriod=24h")
   http = Net::HTTP.new(uri.host, uri.port)
