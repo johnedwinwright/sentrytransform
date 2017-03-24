@@ -11,7 +11,6 @@ get '/' do
   status.to_json
 end
 
-
 get '/sentry' do
   project = params[:project]
   content_type :json
