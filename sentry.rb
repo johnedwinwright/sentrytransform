@@ -29,8 +29,7 @@ get '/sentry' do
 
     @sentryresponse = JSON.parse(response.body)
 
-    @sumjson =[]
-    @presumjson ={}
+    @sumjson = {}
     @newdata = 0
     @totalerrorsum = 0
     @totalerrorsumnode = {}
@@ -47,15 +46,13 @@ get '/sentry' do
             @totalerrorsum += count
           end
         end
-        @presumjson.merge!({:"#{toplevel["title"]}" => "#{@newdata}"})
-        @sumjson << @presumjson
-        @presumjson = {}
+        @sumjson.merge!({:"#{toplevel["title"]}" => "#{@newdata}"})
         @newdata = 0
       end
     end
 
     @totalerrorsumnode.merge!(Total_errors: "#{@totalerrorsum}")
-    @sumjson << @totalerrorsumnode
+    @sumjson.merge!(@totalerrorsumnode)
     @sumjson.to_json
 
   else
