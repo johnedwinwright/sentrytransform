@@ -6,7 +6,7 @@ require 'erb'
 require "net/http"
 require "uri"
 
-get '/' do
+get '/_healthcheck' do
   status = "OK"
   status.to_json
 end
